@@ -2,6 +2,7 @@ from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.svm import SVC
 
 # Charger le dataset Iris
 iris = load_iris()
@@ -22,4 +23,21 @@ y_pred = clf.predict(X_test)
 # Calculer l'exactitude
 accuracy = accuracy_score(y_test, y_pred)
 
-print(accuracy)
+print("Accuracy for RandomFOrest test : ", accuracy)
+
+
+# Now SVM 
+
+# Initialiser le modèle SVM
+clf = SVC(random_state=42)
+
+# Entraîner le modèle sur les données d'entraînement
+clf.fit(X_train, y_train)
+
+# Prédire les étiquettes pour les données de test
+y_pred = clf.predict(X_test)
+
+# Calculer l'exactitude
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Accuracy for SVM : ",accuracy)
