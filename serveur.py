@@ -3,6 +3,7 @@ from flask_cors import CORS
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression 
 from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
@@ -16,7 +17,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # Initialiser les modèles
 models = {
     'random_forest': RandomForestClassifier(n_estimators=100, random_state=42).fit(X_train, y_train),
-    'svm': SVC(random_state=42).fit(X_train, y_train)
+    'svm': SVC(random_state=42).fit(X_train, y_train),
+    'logistic_regression': LogisticRegression(random_state=42).fit(X_train, y_train)
 }
 
 @app.route('/predict', methods=['POST'])
