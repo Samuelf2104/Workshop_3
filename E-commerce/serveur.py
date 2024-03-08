@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Activer CORS pour toutes les routes
 
 # Chemin vers le fichier JSON qui stocke les données des produits
 PRODUCTS_FILE = 'products.json'
@@ -119,10 +121,10 @@ def create_order():
     # Calcul du prix total et vérification de l'existence des produits
     total_price = 0
     for item in order_data['products']:
-        product = next((product for product in products if product['id'] == item['productId']), None)
+        product = next((product for product in products if product['id'] == int(item['productId'])), None)
         if not product:
             return jsonify({'error': 'Product not found'}), 404
-        total_price += product['price'] * item.get('quantity', 1)
+        total_price += product['price'] * int(item.get('quantity', 1))
 
 
     list_id = [ order["id"] for order in orders ]
@@ -168,8 +170,8 @@ def add_to_cart(userId):
     products = read_products()
     
     product_details = request.json
-    productId = product_details['productId']
-    quantity = product_details['quantity']
+    productId = int(product_details['productId'])
+    quantity = int(product_details['quantity'])
 
 
     list_id = [ product["id"] for product in products ]
@@ -202,7 +204,7 @@ def get_cart(userId):
     for product in user_cart :
         for prod in products :
             if int(product["productId"]) == prod["id"]:
-                price = price + product["quantity"]*prod["price"]
+                price = price + int(product["quantity"])*int(prod["price"])
 
     resp = { "cart" : user_cart, "price" : price }
 

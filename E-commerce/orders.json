@@ -100,5 +100,35 @@
         "totalPrice": 499.99,
         "orderStatus": "Pending",
         "orderDate": "2024-03-08T15:14:14.499062"
+    },
+    {
+        "userId": "Sam",
+        "products": [
+            {
+                "productId": "1",
+                "quantity": "2"
+            }
+        ],
+        "id": 7,
+        "totalPrice": 200,
+        "orderStatus": "Pending",
+        "orderDate": "2024-03-08T17:42:57.607178"
+    },
+    {
+        "userId": "Sam",
+        "products": [
+            {
+                "productId": "1",
+                "quantity": "2"
+            },
+            {
+                "productId": "3",
+                "quantity": "5"
+            }
+        ],
+        "id": 8,
+        "totalPrice": 950,
+        "orderStatus": "Pending",
+        "orderDate": "2024-03-08T17:44:35.276684"
     }
 ]

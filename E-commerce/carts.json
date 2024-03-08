@@ -1,9 +1,14 @@
 {
     "user123": [
         {
-            "productId": "2",
+            "productId": 2,
             "quantity": 3
         }
     ],
-    "salutsalut": []
+    "esdfgthytfgdrf": [
+        {
+            "productId": "3",
+            "quantity": "4"
+        }
+    ]
 }

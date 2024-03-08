@@ -2,63 +2,461 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple E-Commerce Frontend</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Test du Backend</title>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Logo de la Boutique">
-    <header>
-    <main>
-        <h1>Bienvenue sur Notre Boutique en Ligne De E-commerce</h1>
-    </main>
-    <div class="container">
-        <h1>Products</h1>
-        <div id="product-list" class="row"></div>
-        <!-- Additional sections for Orders and Cart will go here -->
-    </div>
-    <div class="container">
-        <h2>Add New Product</h2>
-        <form id="add-product-form">
-        <input type="text" id="productName" placeholder="Name" required>
-        <input type="text" id="productDescription" placeholder="Description" required>
-        <input type="number" id="productPrice" placeholder="Price" required>
-        <input type="text" id="productCategory" placeholder="Category" required>
-        <input type="checkbox" id="productInStock"> In Stock
-        <button type="submit">Add Product</button></form>
-    </div>
-    <div id="product-details" class="product-details">
-        <input type="number" id="productPrice" placeholder="Id_product" required>
-        <button type="submit">Search Product</button>
-    </div>
+    <h1>Tests d'Intégration Backend</h1>
 
-    <!-- Button to load products -->
-    <button id="load-products-btn">Load Products</button>
+    <h2>Produits</h2>
+    <!-- Obtenir des produits -->
+    <form id="getProductsForm">
+        <input type="text" id="category" placeholder="Catégorie">
+        <input type="checkbox" id="inStock"> En Stock?
+        <button type="submit">Obtenir des produits</button>
+    </form>
+    <div id="productList"></div>
 
-<!-- Container for product listings -->
-    <div id="product-list"></div>
+    <!-- Obtenir un produit spécifique -->
+    <form id="getProductForm">
+        <input type="number" id="productId" placeholder="ID du produit">
+        <button type="submit">Obtenir un produit spécifique</button>
+    </form>
+    <div id="productDetails"></div>
 
-<!-- A hidden form that could be used to edit product details; shown when an 'Edit' button is clicked -->
-    <div id="edit-product-form" style="display: none;">
-  <!-- The form fields will be populated with JavaScript when editing a product -->
-    </div>
+    <!-- Ajouter un produit -->
+    <form id="addProductForm">
+        <input type="text" id="addProductName" placeholder="Nom">
+        <input type="text" id="addProductCategory" placeholder="Catégorie">
+        <input type="text" id="addProductDescription" placeholder="Description">
+        <input type="number" id="addProductPrice" placeholder="Prix">
+        <input type="number" id="addProductQuantity" placeholder="Quantité">
+        <button type="submit">Ajouter un produit</button>
+    </form>
 
-<!-- Container for the shopping cart -->
-    <div id="shopping-cart"></div>
+    <!-- Mettre à jour un produit -->
+    <form id="updateProductForm">
+        <input type="number" id="updateProductId" placeholder="ID du produit">
+        <input type="number" id="updateProductQuantity" placeholder="quantité du produit">
+        <input type="text" id="updateProductName" placeholder="Nouveau nom">
+        <input type="number" id="updateProductPrice" placeholder="Nouveau prix">
+        <input type="text" id="updateProductDescription" placeholder="Nouvelle Description">
+        <input type="text" id="updateProductCategory" placeholder="Nouvelle Catégorie">
+        <button type="submit">Mettre à jour un produit</button>
+    </form>
 
-    <div id="product-list">
-    <!-- ... Other products ... -->
-    <div id="product-123"> <!-- The product ID is used in the element ID -->
-        <h3>Product Name</h3>
-        <!-- ... Other product details ... -->
-        <button onclick="removeProduct(123)">Remove Product</button> <!-- Call the remove function with the product's ID -->
-    </div>
-    <!-- ... Other products ... -->
-    </div>
+    <!-- Supprimer un produit -->
+    <form id="deleteProductForm">
+        <input type="number" id="deleteProductId" placeholder="ID du produit à supprimer">
+        <button type="submit">Supprimer un produit</button>
+    </form>
 
-    
-    <script src="script.js"></script>
+    <h2>Commandes</h2>
+    <!-- Créer une commande -->
+    <form id="createOrderForm">
+        <input type="text" id="orderUserId" placeholder="ID de l'utilisateur">
+        <div id="productsContainer">
+            <div class="productItem">
+                <input type="number" placeholder="ID du produit" class="productId">
+                <input type="number" placeholder="Quantité" class="productQuantity">
+            </div>
+        </div>
+        <button type="button" onclick="addProductField()">Ajouter un produit</button>
+        <button type="submit">Créer une commande</button>
+    </form>
+    <div id="orderDetails"></div>
+
+
+    <!-- Obtenir les commandes d'un utilisateur -->
+    <form id="getUserOrdersForm">
+        <input type="text" id="getUserOrdersUserId" placeholder="ID de l'utilisateur pour les commandes">
+        <button type="submit">Obtenir les commandes d'un utilisateur</button>
+    </form>
+    <div id="userOrders"></div>
+
+
+    <h2>Panier</h2>
+    <!-- Ajouter au panier -->
+    <form id="addToCartForm">
+        <input type="text" id="cartUserId" placeholder="ID de l'utilisateur">
+        <input type="number" id="cartProductId" placeholder="ID du produit">
+        <input type="number" id="cartQuantity" placeholder="Quantité">
+        <button type="submit">Ajouter au panier</button>
+    </form>
+
+    <!-- Obtenir le panier -->
+    <form id="getCartForm">
+        <input type="text" id="getCartUserId" placeholder="ID de l'utilisateur pour le panier">
+        <button type="submit">Obtenir le panier</button>
+    </form>
+    <div id="userCart"></div>
+
+    <!-- Retirer du panier -->
+    <form id="removeFromCartForm">
+        <input type="text" id="removeCartUserId" placeholder="ID de l'utilisateur">
+        <input type="number" id="removeCartProductId" placeholder="ID du produit à retirer">
+        <button type="submit">Retirer du panier</button>
+    </form>
+
+    <script>
+
+
+        document.getElementById('addToCartForm').onsubmit = function(event) {
+            event.preventDefault();
+            const cartUserId = document.getElementById('cartUserId').value;
+            const cartProductId = document.getElementById('cartProductId').value;
+            const cartQuantity = document.getElementById('cartQuantity').value;
+            addToCart(cartUserId, cartProductId, cartQuantity);
+        };
+
+
+        document.getElementById('getCartForm').onsubmit = function(event) {
+            event.preventDefault();
+            const getCartUserId = document.getElementById('getCartUserId').value;
+            getCart(getCartUserId);
+        };
+
+        document.getElementById('removeFromCartForm').onsubmit = function(event) {
+            event.preventDefault();
+            const removeCartUserId = document.getElementById('removeCartUserId').value;
+            const removeCartProductId = document.getElementById('removeCartProductId').value;
+            removeFromCart(removeCartUserId, removeCartProductId);
+        };
+
+
+
+
+
+
+
+
+        document.getElementById('getProductForm').onsubmit = function(event) {
+            event.preventDefault();
+            const productId = document.getElementById('productId').value;
+            getProduct(productId);
+        };
+
+        document.getElementById('getProductsForm').onsubmit = function(event) {
+            event.preventDefault();
+            const category = document.getElementById('category').value;
+            const inStock = document.getElementById('inStock').checked;
+            getProducts(category, inStock);
+        };
+
+        document.getElementById('addProductForm').onsubmit = function(event) {
+            event.preventDefault();
+            const category = document.getElementById('addProductCategory').value;
+            const name = document.getElementById('addProductName').value;
+            const price = document.getElementById('addProductPrice').value;
+            const quantity = document.getElementById('addProductQuantity').value;
+            const description = document.getElementById('addProductDescription').value;
+            addProduct({
+              name: name,
+              category: category,
+              price: price,
+              quantity: quantity,
+              description: description
+            });
+        };
+
+        document.getElementById('deleteProductForm').onsubmit = function(event) {
+            event.preventDefault();
+            const productId = document.getElementById('deleteProductId').value;
+            deleteProduct(productId);
+        };
+
+        document.getElementById('updateProductForm').onsubmit = function(event) {
+            event.preventDefault();
+            const Id = document.getElementById('updateProductId').value;
+            const Name = document.getElementById('updateProductName').value;
+            const Price = document.getElementById('updateProductPrice').value;
+            const Category = document.getElementById('updateProductCategory').value;
+            const Description = document.getElementById('updateProductDescription').value;
+            const quantity = document.getElementById('updateProductQuantity').value;
+            updateProduct(Id, {
+              name: Name,
+              category: Category,
+              price: Price,
+              quantity: quantity,
+              description: Description
+            });
+        };
+
+        document.getElementById('createOrderForm').onsubmit = function(event) {
+            event.preventDefault();
+            const userId = document.getElementById('orderUserId').value;
+            const productItems = document.querySelectorAll('.productItem');
+            const products = Array.from(productItems).map(item => {
+                return {
+                    productId: item.querySelector('.productId').value,
+                    quantity: item.querySelector('.productQuantity').value,
+                };
+            });
+
+            const orderData = {
+                userId: userId,
+                products: products,
+            };
+
+            console.log(orderData["products"])
+
+            createOrder(orderData);
+        };
+
+        document.getElementById('getUserOrdersForm').onsubmit = function(event) {
+            event.preventDefault();
+            const productId = document.getElementById('getUserOrdersUserId').value;
+            getUserOrders(productId);
+        };
+
+
+        const BASE_URL = "http://127.0.0.1:5000";
+        
+        function getProducts(category, inStock) {
+          const url = new URL(`${BASE_URL}/products`);
+          if (category) url.searchParams.append('category', category);
+          if (inStock !== undefined) url.searchParams.append('inStock', inStock);
+
+          return fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                  // Récupérer l'élément HTML où afficher la liste des produits
+                  const list = document.getElementById('productList');
+                  list.innerHTML = ''; // Nettoyer la liste précédente
+
+                  // Vérifier si des produits ont été retournés
+                  if (data.length > 0) {
+                      // Construire le contenu HTML pour chaque produit
+                      const items = data.map(product => `
+                          <div>
+                              <h3>${product.name}</h3>
+                              <p>Catégorie: ${product.category}</p>
+                              <p>Prix: ${product.price}</p>
+                              <p>Quantité: ${product.quantity}</p>
+                          </div>
+                      `).join(''); // Transformer le tableau en une chaîne de caractères HTML
+                      list.innerHTML = items;
+                  } else {
+                      // Afficher un message si aucun produit n'est trouvé
+                      list.innerHTML = '<p>Aucun produit trouvé.</p>';
+                  }
+              })
+              .catch(error => {
+                  // Afficher l'erreur dans le même élément en cas de problème
+                  document.getElementById('productList').innerHTML = `Erreur: ${error.message}`;
+              });
+      }
+
+        function getProduct(id) {
+          return fetch(`${BASE_URL}/products/${id}`)
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Product not found');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  // Créer un élément HTML pour afficher les informations du produit
+                  const details = document.getElementById('productDetails');
+                  details.innerHTML = ''; // Nettoyer les détails précédents
+
+                  // Transformer les données du produit en éléments HTML et les afficher
+                  const content = `
+                      <h3>Produit: ${data.name}</h3>
+                      <p>Catégorie: ${data.category}</p>
+                      <p>Prix: ${data.price}</p>
+                      <p>Quantité: ${data.quantity}</p>
+                  `;
+                  details.innerHTML = content;
+              })
+              .catch(error => {
+                  // Afficher l'erreur dans le même élément en cas de problème
+                  document.getElementById('productDetails').innerHTML = `Erreur: ${error.message}`;
+              });
+      }
+
+
+        function addProduct(productData) {
+          return fetch(`${BASE_URL}/products`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+        }
+
+
+        function updateProduct(id, productData) {
+          return fetch(`${BASE_URL}/products/${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData),
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+        }
+
+
+        function deleteProduct(id) {
+          return fetch(`${BASE_URL}/products/${id}`, {
+            method: 'DELETE',
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+        }
+
+
+
+
+        function createOrder(orderData) {
+            return fetch(`${BASE_URL}/orders`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Afficher les détails de la commande dans l'élément HTML
+                const orderDetails = document.getElementById('orderDetails');
+                orderDetails.innerHTML = `<p>Commande créée avec succès. ID de commande: ${data.id}</p>`;
+                return data; // Renvoie les données pour une utilisation ultérieure si nécessaire
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('orderDetails').innerHTML = `Erreur: ${error.message}`;
+            });
+        }
+
+
+        function addProductField() {
+            const container = document.getElementById('productsContainer');
+            const productItem = document.createElement('div');
+            productItem.className = 'productItem';
+            productItem.innerHTML = `
+                <input type="number" placeholder="ID du produit" class="productId">
+                <input type="number" placeholder="Quantité" class="productQuantity">
+            `;
+            container.appendChild(productItem);
+        }
+
+
+        function getUserOrders(userId) {
+            return fetch(`${BASE_URL}/orders/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const ordersContainer = document.getElementById('userOrders');
+                    ordersContainer.innerHTML = ''; // Nettoyer les commandes précédentes
+                    
+                    if (data.length > 0) {
+                        // Construire le contenu HTML pour chaque commande
+                        data.forEach(order => {
+                            const orderElement = document.createElement('div');
+                            let productsList = '<ul>';
+                            order.products.forEach(product => {
+                                productsList += `<li>Produit ID: ${product.productId}, Quantité: ${product.quantity}</li>`;
+                            });
+                            productsList += '</ul>';
+                            
+                            orderElement.innerHTML = `
+                                <h3>Commande ID: ${order.id}</h3>
+                                <p>Utilisateur ID: ${order.userId}</p>
+                                ${productsList}
+                            `;
+                            ordersContainer.appendChild(orderElement);
+                        });
+                    } else {
+                        // Afficher un message si aucun produit n'est trouvé
+                        ordersContainer.innerHTML = '<p>Aucune commande trouvée pour cet utilisateur.</p>';
+                    }
+                    return data; // Renvoie les données pour une utilisation ultérieure si nécessaire
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('userOrders').innerHTML = `Erreur: ${error.message}`;
+                });
+        }
+
+
+
+
+
+
+        function addToCart(userId, productId, quantity) {
+          const url = `${BASE_URL}/cart/${userId}`;
+          const cartItem = {
+            productId: String(productId), // Convertir en chaîne de caractères si nécessaire
+            quantity: quantity,
+          };
+
+          return fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cartItem),
+          })
+          .then(response => response.json())
+          .then(data => console.log('addToCart Response:', data))
+          .catch(error => console.error('Error:', error));
+        }
+
+        function getCart(userId) {
+              const url = `${BASE_URL}/cart/${userId}`;
+
+              return fetch(url)
+                  .then(response => response.json())
+                  .then(data => {
+                      const cartContainer = document.getElementById('userCart');
+                      cartContainer.innerHTML = ''; // Nettoyer le panier précédent
+                      
+                      // Utilisation directe de data.cart car la structure a changé
+                      if (data.cart && data.cart.length > 0) {
+                          // Construire le contenu HTML pour chaque élément du panier
+                          let cartItems = '<ul>';
+                          data.cart.forEach(item => {
+                              cartItems += `<li>Produit ID: ${item.productId}, Quantité: ${item.quantity}</li>`;
+                          });
+                          cartItems += '</ul>';
+                          
+                          cartContainer.innerHTML = `
+                              <h3>Panier de l'utilisateur ${userId}</h3>
+                              ${cartItems}
+                              <p>Prix total : ${data.price}</p>
+                          `;
+                      } else {
+                          // Afficher un message si le panier est vide
+                          cartContainer.innerHTML = '<p>Le panier est vide.</p>';
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      document.getElementById('userCart').innerHTML = `Erreur: ${error.message}`;
+                  });
+          }
+
+
+
+
+        function removeFromCart(userId, productId) {
+          const url = `${BASE_URL}/cart/${userId}/item/${String(productId)}`; // Convertir productId en chaîne de caractères si nécessaire
+
+          return fetch(url, {
+            method: 'DELETE',
+          })
+          .then(response => response.json())
+          .then(data => console.log('removeFromCart Response:', data))
+          .catch(error => console.error('Error:', error));
+        }
+
+    </script>
 </body>
 </html>
-    
