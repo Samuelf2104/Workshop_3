@@ -1,2 +1,0 @@
-Pour la partie e-commerce, il faut run les deux adresses en meme temps sur deux terminaux distincts
-et pouur le deuxieme pour avoir l'adresse il faut ajouter getserver
