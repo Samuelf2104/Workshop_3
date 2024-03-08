@@ -1,0 +1,110 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4; /* Light grey background for the whole page */
+}
+
+header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 40px 20px; /* Increased padding */
+    text-align: center;
+}
+
+.container {
+    padding: 20px; /* Add padding */
+    margin: 20px auto; /* Center the container with automatic side margins */
+    background-color: #ffffff; /* White background for content */
+    border-radius: 5px; /* Rounded corners for containers */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 1200px; /* Set a max-width for large screens */
+}
+
+h1, h2 {
+    margin-bottom: 30px; /* Space out the heading from the content below */
+}
+
+/* Styling the form for adding products */
+#add-product-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Adds space between form elements */
+    margin-bottom: 20px; /* Space after the form */
+    justify-content: center; /* Center form elements */
+}
+
+#add-product-form input[type="text"],
+#add-product-form input[type="number"],
+#add-product-form select {
+    padding: 10px;
+    border: 1px solid #ddd; /* Consistent border styling */
+    border-radius: 4px; /* Rounded borders for inputs */
+    margin-bottom: 10px; /* Space at the bottom of each input */
+}
+
+#add-product-form .form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space at the bottom */
+}
+
+#add-product-form .form-check input {
+    margin-right: 5px;
+}
+
+#add-product-form button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition for background color */
+}
+
+#add-product-form button:hover {
+    background-color: #218838;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px; /* Ensure there's space before the footer */
+}
+
+/* Utilisez des médias queries pour ajuster le layout sur mobile */
+@media (max-width: 768px) {
+    #add-product-form {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 95%; /* Smaller width on mobile for some side padding */
+    }
+}
+
+
+#product-list div {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
