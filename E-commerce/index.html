@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple E-Commerce Frontend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo de la Boutique">
+    <header>
+    <main>
+        <h1>Bienvenue sur Notre Boutique en Ligne De E-commerce</h1>
+    </main>
+    <div class="container">
+        <h1>Products</h1>
+        <div id="product-list" class="row"></div>
+        <!-- Additional sections for Orders and Cart will go here -->
+    </div>
+    <div class="container">
+        <h2>Add New Product</h2>
+        <form id="add-product-form">
+        <input type="text" id="productName" placeholder="Name" required>
+        <input type="text" id="productDescription" placeholder="Description" required>
+        <input type="number" id="productPrice" placeholder="Price" required>
+        <input type="text" id="productCategory" placeholder="Category" required>
+        <input type="checkbox" id="productInStock"> In Stock
+        <button type="submit">Add Product</button></form>
+    </div>
+    <div id="product-details" class="product-details">
+        <input type="number" id="productPrice" placeholder="Id_product" required>
+        <button type="submit">Search Product</button>
+    </div>
+
+    <!-- Button to load products -->
+    <button id="load-products-btn">Load Products</button>
+
+<!-- Container for product listings -->
+    <div id="product-list"></div>
+
+<!-- A hidden form that could be used to edit product details; shown when an 'Edit' button is clicked -->
+    <div id="edit-product-form" style="display: none;">
+  <!-- The form fields will be populated with JavaScript when editing a product -->
+    </div>
+
+<!-- Container for the shopping cart -->
+    <div id="shopping-cart"></div>
+
+    <div id="product-list">
+    <!-- ... Other products ... -->
+    <div id="product-123"> <!-- The product ID is used in the element ID -->
+        <h3>Product Name</h3>
+        <!-- ... Other product details ... -->
+        <button onclick="removeProduct(123)">Remove Product</button> <!-- Call the remove function with the product's ID -->
+    </div>
+    <!-- ... Other products ... -->
+    </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+    
