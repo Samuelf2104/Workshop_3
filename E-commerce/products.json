@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "description": "Description of product 1",
+        "price": 100,
+        "category": "Category 1",
+        "quantity": 15
+    },
+    {
+        "id": 2,
+        "name": "Produit mis a jour",
+        "description": "Description of product 2",
+        "price": 299.99,
+        "category": "Category 2",
+        "quantity": 300
+    },
+    {
+        "name": "New Product",
+        "description": "Description of new product",
+        "price": 150,
+        "category": "Category 2",
+        "quantity": 12,
+        "id": 3
+    },
+    {
+        "name": "New Product",
+        "description": "Description of new product",
+        "price": 150,
+        "category": "Category 2",
+        "quantity": 12,
+        "id": 4
+    },
+    {
+        "name": "New Product",
+        "description": "Description of new product",
+        "price": 150,
+        "category": "Category 2",
+        "quantity": 12,
+        "id": 5
+    }
+]
