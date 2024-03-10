@@ -1,110 +1,178 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* Resetting default browser styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f4f4f4; /* Light grey background for the whole page */
 }
 
+/* Styling the body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+    color: #333;
+    padding: 20px;
+}
+
+/* Header styles */
 header {
     background-color: #007bff;
     color: #ffffff;
-    padding: 40px 20px; /* Increased padding */
+    padding: 60px 20px; /* Increased top and bottom padding for a larger header */
     text-align: center;
 }
 
-.container {
-    padding: 20px; /* Add padding */
-    margin: 20px auto; /* Center the container with automatic side margins */
-    background-color: #ffffff; /* White background for content */
-    border-radius: 5px; /* Rounded corners for containers */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    max-width: 1200px; /* Set a max-width for large screens */
+/* Larger logo image */
+header img {
+    width: 450px; /* Adjust as necessary for your logo */
+    height: auto;
+    margin-bottom: 20px; /* Provide some space below the logo */
 }
 
+/* Main heading styles */
 h1, h2 {
-    margin-bottom: 30px; /* Space out the heading from the content below */
+    color: #333;
+    margin-bottom: 1em; /* Adds space below headings */
 }
 
-/* Styling the form for adding products */
-#add-product-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Adds space between form elements */
-    margin-bottom: 20px; /* Space after the form */
-    justify-content: center; /* Center form elements */
-}
-
-#add-product-form input[type="text"],
-#add-product-form input[type="number"],
-#add-product-form select {
-    padding: 10px;
-    border: 1px solid #ddd; /* Consistent border styling */
-    border-radius: 4px; /* Rounded borders for inputs */
-    margin-bottom: 10px; /* Space at the bottom of each input */
-}
-
-#add-product-form .form-check {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; /* Space at the bottom */
-}
-
-#add-product-form .form-check input {
-    margin-right: 5px;
-}
-
-#add-product-form button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s; /* Smooth transition for background color */
-}
-
-#add-product-form button:hover {
-    background-color: #218838;
-}
-
-/* Footer styling */
-footer {
-    background-color: #333;
-    color: #ffffff;
-    text-align: center;
+/* Form styling */
+form {
+    background: #fff;
     padding: 20px;
-    margin-top: 30px; /* Ensure there's space before the footer */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* consistent space between form elements */
 }
 
-/* Utilisez des médias queries pour ajuster le layout sur mobile */
-@media (max-width: 768px) {
-    #add-product-form {
-        flex-direction: column;
-    }
-
-    .container {
-        width: 95%; /* Smaller width on mobile for some side padding */
-    }
-}
-
-
-#product-list div {
-    border: 1px solid #ddd;
+/* Input and button styling */
+input[type=text],
+input[type=number],
+button,
+select {
     padding: 15px;
-    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px; /* Adds space below each input */
 }
 
+/* Styling for buttons */
 button {
-    margin-right: 5px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background: #28a745;
+    color: #fff;
     cursor: pointer;
+    border: 0;
+    transition: background 0.3s ease; /* Smooth transition for button background color */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #218838;
+}
+
+/* Style for product items and other containers */
+.productItem, #productList div, #userOrders div, #userCart div {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Label styles */
+.productItem label, #productList label, #userOrders label, #userCart label {
+    font-weight: bold; /* Makes labels bold */
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Error and success message styles */
+.error {
+    color: #d9534f;
+    margin: 10px 0;
+}
+
+.success {
+    color: #5cb85c;
+    margin: 10px 0;
+}
+
+/* Styling for larger screens */
+@media (min-width: 768px) {
+    form {
+        flex-direction: row; /* Align form items in a row on larger screens */
+        flex-wrap: wrap;
+        align-items: center; /* Aligns items vertically */
+    }
+
+    input[type=text],
+    input[type=number],
+    select {
+        flex: 1; /* Allows input fields to grow and fill available horizontal space */
+        margin-right: 10px; /* Adds space to the right of inputs */
+    }
+
+    button {
+        white-space: nowrap; /* Prevents button text from wrapping */
+    }
+}
+
+/* Additional global styling if needed */
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the container */
+}
+
+/* Utility classes for padding and margin */
+.p-1 { padding: 10px; }
+.mt-1 { margin-top: 10px; }
+.mb-1 { margin-bottom: 10px; }
+
+/* Product list styling */
+#productList {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual product styling */
+#productList div {
+    background-color: #ffffff; /* White background for individual product */
+    border: 1px solid #e1e1e1; /* Light gray border */
+    margin-bottom: 15px; /* Space between products */
+    padding: 15px; /* Padding inside product div */
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
+}
+
+#productList div:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+/* Product details styling */
+#productList h3 {
+    margin-top: 0;
+    color: #007bff; /* Theme color for product names */
+}
+
+#productList p {
+    color: #555; /* Darker text color for contrast */
+    font-size: 0.9rem; /* Slightly smaller font size for product details */
+    line-height: 1.5; /* Improved line spacing for readability */
+}
+
+/* You might want to add a responsive design for the product list as well */
+@media (min-width: 768px) {
+    #productList div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #productList p {
+        margin: 0 10px; /* Horizontal spacing for product details */
+    }
 }

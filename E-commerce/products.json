@@ -38,5 +38,29 @@
         "category": "Category 2",
         "quantity": 12,
         "id": 5
+    },
+    {
+        "name": "Chevilles",
+        "category": "category 1",
+        "price": "17",
+        "quantity": "3",
+        "description": "pour les pieds",
+        "id": 6
+    },
+    {
+        "name": "Chevilles",
+        "category": "category 1",
+        "price": "17",
+        "quantity": "3",
+        "description": "pour les pieds",
+        "id": 7
+    },
+    {
+        "name": "Chevilles",
+        "category": "category 1",
+        "price": "17",
+        "quantity": "3",
+        "description": "pour les pieds",
+        "id": 8
     }
 ]
